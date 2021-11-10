@@ -17,19 +17,14 @@ public class Kata5P1 {
         conn = DriverManager.getConnection(url);
         System.out.println("Connexión a SQLite establecida\n");
         
+        String sql = "CREATE TABLE IF NOT EXISTS email (\n"
+                + " id integer PRIMARY KEY AUTOINCREMENT,\n"
+                + " mail text NOT NULL);";
+// Creamos la tabla email
         
-        String sql = "SELECT * FROM PEOPLE";
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-// Bucle sobre el conjunto de registros.
-        System.out.println("Mostrando los registro de la tabla PEOPLE: ");
-        while (rs.next()) {
-            System.out.println(rs.getInt("Id") + "\t"
-            + rs.getString("Nombre") + "\t"
-            + rs.getString("Apellidos") + "\t"
-            + rs.getString("Departamento") + "\t");
-        }
-        System.out.println("----------FINALIZADO----------");
+        stmt.execute(sql);
+        System.out.println("Tabla creada");  
         
 // Cerramos conexión con la base de datos
         conn.close();
